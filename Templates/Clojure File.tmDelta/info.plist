@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>changed</key>
+	<dict>
+		<key>command</key>
+		<string>#!/usr/bin/env ruby -wKU
+
+f = open(ENV["TM_NEW_FILE"], 'w')
+template = open("template.clj").read
+
+ENV["TM_YEAR"] = `date +%Y`.chomp
+ENV["TM_DATE"] = `date +%Y-%m-%d`.chomp
+
+newfd = ENV['TM_NEW_FILE_DIRECTORY']
+maven_struct = /^.*(\/src\/|\/test\/)/
+root = ""
+root = (newfd.sub(maven_struct , '')).gsub(/\//, '.').gsub(/_/, '-')+'.' if newfd =~ maven_struct
+ENV["CLJ_NAMESPACE"] = root+ENV["TM_NEW_FILE_BASENAME"]
+
+if ENV["TM_SOFT_TABS"] == "YES"
+	tab_size = ENV["TM_TAB_SIZE"].to_i
+	tab_size = tab_size ? tab_size : 2
+	template = template.gsub(/\t/, " "*tab_size)
+end
+
+template = template.gsub(/[$]\{([^}]+)\}/){|match| "#{ENV[$1]}" }
+f.write template
+f.close
+</string>
+	</dict>
+	<key>deleted</key>
+	<array/>
+	<key>isDelta</key>
+	<true/>
+	<key>uuid</key>
+	<string>60C8A283-93AC-434A-8A57-73523DD04F81</string>
+</dict>
+</plist>
