@@ -2,10 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>changed</key>
-	<dict>
-		<key>command</key>
-		<string>#!/usr/bin/env ruby -wKU
+	<key>command</key>
+	<string>#!/usr/bin/env ruby -wKU
 
 f = open(ENV["TM_NEW_FILE"], 'w')
 template = open("template.clj").read
@@ -27,14 +25,12 @@ end
 
 template = template.gsub(/[$]\{([^}]+)\}/){|match| "#{ENV[$1]}" }
 f.write template
-f.close
-</string>
-	</dict>
-	<key>deleted</key>
-	<array/>
-	<key>isDelta</key>
-	<true/>
+f.close</string>
+	<key>extension</key>
+	<string>clj</string>
+	<key>name</key>
+	<string>Clojure</string>
 	<key>uuid</key>
-	<string>60C8A283-93AC-434A-8A57-73523DD04F81</string>
+	<string>13726760-0EFD-4CD5-98BB-5889B0E5C405</string>
 </dict>
 </plist>
